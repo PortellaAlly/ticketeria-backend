@@ -1,6 +1,7 @@
 package com.example.ticket.ticketeria_back_end.controller;
 
 import com.example.ticket.ticketeria_back_end.database.model.MovieEntity;
+import com.example.ticket.ticketeria_back_end.dto.MovieDto;
 import com.example.ticket.ticketeria_back_end.service.MoviesService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,12 +15,6 @@ import java.util.List;
 @RequestMapping("/v1/mvinfo")
 @RequiredArgsConstructor
 public class MovieInfoController {
-    /*
-    @PostMapping
-    public ResponseEntity<String> CreateMovie(){
-        return new ResponseEntity<>("teste criação", HttpStatus.CREATED);
-    }
-    */
 
     private final MoviesService moviesService;
 
@@ -27,5 +22,18 @@ public class MovieInfoController {
     @ResponseStatus(HttpStatus.OK)
     public List<MovieEntity>getMovies(){
         return MoviesService.getMovies();
+    }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public MovieEntity createMovie(@RequestBody MovieDto movieDto) {
+        return moviesService.addMovie(movieDto);
+    }
+
+    @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.CREATED)
+    public MovieEntity updateMovie(@PathVariable Integer id,
+                                    @RequestBody MovieDto movieDto) {
+        return moviesService.putMovie(movieDto, id);
     }
 }

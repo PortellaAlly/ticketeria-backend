@@ -88,4 +88,20 @@ public class MoviesService {
 
         return newMovie;
     }
+
+    public MovieEntity putMovie(MovieDto movieDto, Integer id){
+
+        MovieEntity movie = MOVIES.stream()
+                .filter(m -> m.getId().equals(id))
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("Filme nao encontrado"));
+
+        movie.setTitle(movieDto.getTitle());
+        movie.setSinopse(movieDto.getSinopse());
+        movie.setRestrito(movieDto.isRestrito());
+        movie.setImg_url(movieDto.getImg_url());
+        movie.setClass_etaria(movieDto.getClass_etaria());
+
+        return movie;
+    }
 }
