@@ -2,6 +2,7 @@ package com.example.ticket.ticketeria_back_end.controller;
 
 import com.example.ticket.ticketeria_back_end.database.model.MovieEntity;
 import com.example.ticket.ticketeria_back_end.dto.MovieDto;
+import com.example.ticket.ticketeria_back_end.exception.NotFoundException;
 import com.example.ticket.ticketeria_back_end.service.MoviesService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +34,7 @@ public class MovieInfoController {
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.CREATED)
     public MovieEntity updateMovie(@PathVariable Integer id,
-                                    @RequestBody MovieDto movieDto) {
+                                    @RequestBody MovieDto movieDto) throws NotFoundException {
         return moviesService.putMovie(movieDto, id);
     }
 

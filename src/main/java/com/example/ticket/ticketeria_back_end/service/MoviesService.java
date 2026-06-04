@@ -2,6 +2,7 @@ package com.example.ticket.ticketeria_back_end.service;
 
 import com.example.ticket.ticketeria_back_end.database.model.MovieEntity;
 import com.example.ticket.ticketeria_back_end.dto.MovieDto;
+import com.example.ticket.ticketeria_back_end.exception.NotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -88,12 +89,12 @@ public class MoviesService {
         return newMovie;
     }
 
-    public MovieEntity putMovie(MovieDto movieDto, Integer id){
+    public MovieEntity putMovie(MovieDto movieDto, Integer id) throws NotFoundException {
 
         MovieEntity movie = MOVIES.stream()
                 .filter(m -> m.getId().equals(id))
                 .findFirst()
-                .orElseThrow(() -> new RuntimeException("Filme nao encontrado"));
+                .orElseThrow(() -> new NotFoundException("Filme nao encontrado"));
 
         movie.setTitle(movieDto.getTitle());
         movie.setSinopse(movieDto.getSinopse());
