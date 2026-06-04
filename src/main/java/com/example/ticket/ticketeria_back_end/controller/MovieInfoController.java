@@ -36,4 +36,11 @@ public class MovieInfoController {
                                     @RequestBody MovieDto movieDto) {
         return moviesService.putMovie(movieDto, id);
     }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public MovieEntity deleteMovie(@PathVariable Integer id) {
+        moviesService.removeMovie(id);
+        return null;
+    }
 }

@@ -2,7 +2,6 @@ package com.example.ticket.ticketeria_back_end.service;
 
 import com.example.ticket.ticketeria_back_end.database.model.MovieEntity;
 import com.example.ticket.ticketeria_back_end.dto.MovieDto;
-import lombok.Builder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -103,5 +102,10 @@ public class MoviesService {
         movie.setClass_etaria(movieDto.getClass_etaria());
 
         return movie;
+    }
+
+    public MovieEntity removeMovie(Integer id){
+        MOVIES.removeIf(m -> m.getId().equals(id));
+        return null;
     }
 }
