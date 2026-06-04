@@ -84,8 +84,8 @@ public class MoviesService {
                 .class_etaria(movieDto.getClass_etaria())
                 .build();
 
-        MOVIES.add(newMovie)
+        MOVIES.add(newMovie);
 
-        return movieEntity;
+        return newMovie;
     }
 }
